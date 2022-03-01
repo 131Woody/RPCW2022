@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <metadata>
+        <titulo>TPC2</titulo>
+        <data>28 de fevereiro de 2022</data>
+        <autor>
+            <nome>Renata Ferreira Teixeira</nome>
+            <id>PG47603</id>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </metadata>
+    <resumo>
+        <p>Este trabalho consistia no seguinte:</p>
+        <p>Ler um ficheiro JSON e gerar páginas HTML para cada filme </p>
+        <p>Criar um servidor para servir as paginas </p>
+        <p>Apresentar a lista de filmes ordenados alfabeticamente, sendo que se carregar no nome do filme reencaminha para a página correspondente</p>
+    </resumo>
+    <resultado>
+        <url>servidor.js</url>
+        <nome>Servidor de ficheiros</nome>
+    </resultado>
+    <resultado>
+        <url>parser.py</url>
+        <nome>Script para gerar as páginas html</nome>
+    </resultado>
+    <resultado>
+        <url>/html/index.html</url>
+        <nome>Página com a lista de filmes</nome>
+    </resultado>
+
+</doc>
