@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <titulo>TPC3</titulo>
+        <data>15 de Março de 2022</data>
+        <autor>
+            <id>PG47603</id>
+            <nome>Renata Ferreira Teixeira</nome>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Este trabalho consistia em desevolver uma servidor Web que iria buscar informação sobre alunos, cursos e instrumentos a um REST API. 
+           </p>
+    </resumo>
+    <resultados>
+        <resultado>
+            <url>server.js</url>
+            <nome>Servidor resposável para recolher os dados</nome>
+        </resultado>
+        <resultado>
+            <url>db.json</url>
+            <nome>Ficheiro JSON usado para criar um REST API</nome>
+        </resultado>
+    </resultados>
+</doc>
