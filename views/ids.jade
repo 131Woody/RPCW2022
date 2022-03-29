@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1.w3-container.w3-blue Lista de Músicas
+  table.w3-table-all
+      tr.w3-green
+          th Identificador
+          th Titulo
+          th Provincia
+      each e in musicas
+          tr 
+            td
+                a(href="/musicas/#{e.id}")=e.id
+            td=e.tit
+            td=e.prov
