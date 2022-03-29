@@ -29,10 +29,10 @@ router.get('/inserir', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   var id = req.params.id
   //res.send('respond with a resource');
-  axios.get("http://localhost:3000/musicas?id=" + id)
+  axios.get("http://localhost:3000/musicas/" + id)
     .then(response => {
-      var musica = response.data
-      res.render("id", {musicas : musica })
+      var a = response.data
+      res.render("id", {musica: a })
     })
     .catch(function (erro) {
       res.render('error', { error: erro });
@@ -45,8 +45,10 @@ router.get('/prov/:prov', function(req, res, next) {
   //res.send('respond with a resource');
   axios.get("http://localhost:3000/musicas?prov=" + prov)
     .then(response => {
-      var provincias = response.data
-      res.render("prov", {musicas : provincias })
+      var musicas = response.data
+      res.render("prov", {provincias : musicas , provincia : prov})
+      
+      
     })
     .catch(function (erro) {
       res.render('error', { error: erro });
