@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 
@@ -14,7 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-var mongoDB = 'mongodb://127.0.0.1/TPC&' //IP do localhost + nome da base de dados que queremos criar
+var mongoDB = 'mongodb://127.0.0.1/TPC6' //IP do localhost + nome da base de dados que queremos criar
 mongoose.connect(mongoDB, {usenewUrlParser: true, useUnifiedTopology : true}); //efetuar conexão 
 var db = mongoose.connection;
 

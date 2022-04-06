@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  h2.w3-blue-cyan.w3-center.w3-monospace File Manager
+  form.w3-container(action='/' method='POST' enctype='multipart/form-data')
+    label.w3-text-blue
+        b Select file
+    input.w3-input.w3-border.w3-light-grey(type='file' name='myFile')
+    label.w3-text-blue
+        b Description 
+    input.w3-input.w3-border.w3-light-grey(type='text' name='descricao')
+    input(type="submit", value='upload')
+  
+  h2.w3-indigo.w3-center.w3-monospace Lista de Ficheiros:
+  table.w3-table.w3-bordered
+    tr
+      th.w3-center Date
+      th.w3-center Name
+      th.w3-center Description
+      th.w3-center Type
+      th.w3-center size
+    each f in list
+      tr
+        td.w3-center= f.data
+        td.w3-center= f.nome
+        td.w3-center= f.descricao
+        td.w3-center= f.mimeType
+        td.w3-center= f.size
+        td
+          form(action="/delete/"+f._id method='POST')
+            input.w3-white.w3-border.w3-border-indigo.w3-round-large(type='submit' value='Delete')
+    

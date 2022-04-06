@@ -5,90 +5,55 @@ var jsonfile = require('jsonfile');
 var fs = require('fs');
 
 var File = require('../controllers/file');
+const file = require('../models/file');
 var upload = multer({dest:'uploads'})
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  // Working
-  File.list()
-    .then(data => {
-      res.render('index', {files:data})
-    })
-    .catch(erro => {
-      res.render('error', {error:erro})
-    })
+router.get('/', (req, res) => {
+  File.listar()
+  .then(dados => {
+    res.render('index', {list : dados})
+  })
+  .catch( err => {
+    res.render('error',{error:err})
+  })
+})
 
-  // var files = jsonfile.readFileSync('./dbFiles.json')
+router.post('/', upload.single('myFile'), (req, res) => {
+  let oldPath = __dirname + '/../' + req.file.path
+  let newPath = __dirname + '/../fileStore/' + req.file.originalname
 
-  // res.render('index',{files:files})
-
-});
-
-router.post('/insert',upload.single('myFile'), (req,res) => {
-  var d = new Date().toISOString().substring(0,16)
-
-  // var files = jsonfile.readFileSync('./dbFiles.json')
-
-  
-  let oldPath =  __dirname + '/../' + req.file.path
-  let newPath = __dirname + '/../public/images/' + req.file.originalname
-
-  fs.rename(oldPath,newPath, erro =>{
-    if(erro) res.render('error',{error:erro})
+  fs.rename(oldPath, newPath, error => {
+    if(error) res.render('error', {error: error})
   })
 
-
-  var file = {
-    date : d,
-    desc : req.body.desc,
-    name : req.file.originalname,
-    mimetype : req.file.mimetype,
-    size : req.file.size
+  var d = new Date().toISOString().substring(0, 16)
+  var f = {
+    data: d,
+    nome: req.body.nome,
+    descricao: req.body.descricao,
+    mimeType: req.body.mimeType,
+    size: req.body.size
   }
 
-  // files.push({
-  //   date : d,
-  //   name : req.file.originalname,
-  //   mimetype : req.file.mimetype,
-  //   size : req.file.size
-  // })
+  File.insert(f)
+    .then(() => res.redirect(301, "/"))
+    .catch((erro) => res.render('error', {error:erro}))
+})
 
-  // jsonfile.writeFileSync('./dbFiles.json',files)
-
-  File.insert(file)
-    .then(() => {res.redirect(301,'/')})
-    // .then(data => {res.render('index',res.redirect(307,'/'),{files:data})})
-    .catch(erro => {res.render('erro',{error:erro})})
-  
-});
-
-router.post('/delete/:id',(req,res)=>{
-  // var files = jsonfile.readFileSync('./dbFiles.json')
-  // console.log(files)
-  // delete files[0][req.body.name]
-
-
-  // jsonfile.writeFileSync('./dbFiles.json',files)
-  // files = jsonfile.readFileSync('./dbFiles.json')
-  // res.render('index',res.redirect('/'),{files:files})
-  File.lookup(req.params.id)
+router.post("/delete/:id",(req,res) => {
+  File.consultar(req.params.id)
       .then(data => {
-        var path = __dirname + '/../public/images/' + data.name
+        var path = __dirname + '/../fileStore/' + data.nome
         fs.unlink(path, erro => {
           if(erro) res.render('error', {error:erro})
         })
       })
-      .catch(erro => {res.render('error',{error:erro})})
-
-
+      .catch(erro => {res.render('error', {error : erro})})
 
   File.delete(req.params.id)
-      .then(() => {res.redirect(301,'/')} )
-      .catch(erro => {res.render('error',{error:erro})})
- 
-
+      .then(() => {res.redirect('/')} )
+      .catch(erro => {res.render('error',{error : erro})})
 });
-
 
 module.exports = router;
