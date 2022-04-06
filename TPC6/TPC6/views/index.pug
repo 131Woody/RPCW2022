@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  h2.w3-blue-cyan.w3-center.w3-monospace File Manager
+  h2.w3-cyan.w3-center.w3-monospace File Manager
   form.w3-container(action='/' method='POST' enctype='multipart/form-data')
     label.w3-text-blue
         b Select file
@@ -12,14 +12,14 @@ block content
     input.w3-input.w3-border.w3-light-grey(type='text' name='descricao')
     input(type="submit", value='upload')
   
-  h2.w3-indigo.w3-center.w3-monospace Lista de Ficheiros:
+  h2.w3-pale-blue.w3-center.w3-monospace Lista de Ficheiros:
   table.w3-table.w3-bordered
     tr
       th.w3-center Date
       th.w3-center Name
       th.w3-center Description
       th.w3-center Type
-      th.w3-center size
+      th.w3-center Size
     each f in list
       tr
         td.w3-center= f.data
