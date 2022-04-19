@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1.w3-cyan.w3-center.w3-monospace  Lista Consolidada 
+  p Bem vindo ao Catálogo dos Processos da Administração Pública Portuguesa! 
+
+  h2.w3-pale-blue Lista de Classes de Nível 1:
+  table.w3-table.w3-bordered
+    tr
+      th.w3-center Título
+      th.w3-center Código
+    each e in lista
+      tr
+        td.w3= e.titulo
+        td.w3-center
+          a(href="/" +e.codigo)= e.codigo
+        

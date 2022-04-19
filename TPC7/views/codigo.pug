@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    h1.w3-cyan.w3-center.w3-monospace  Classe #{info.codigo}: #{info.titulo}
+    p #{info.descricao}
+
+    h2.w3-pale-blue Informação Base 
+    table.w3-table.w3-bordered
+        tr
+        th.w3 Título
+        tr
+        td.w3= info.titulo
+        
+    table.w3-table.w3-bordered
+        tr
+        th.w3 Código
+        tr
+        td.w3= info.codigo
+
+    if info.filhos.length > 0 
+
+        h2.w3-pale-blue Lista de Descendentes 
+        table.w3-table.w3-bordered
+            tr
+            th.w3 Código
+            each f in info.filhos
+                tr
+                td.w3
+                    a(href="/" +f.codigo)= f.codigo
+    
+    if info.processosRelacionados.length > 0 
+        if info.nivel == 3 
+            h2.w3-pale-blue Lista dos Processos Relacionados
+            table.w3-table.w3-bordered
+                tr
+                th.w3 Código
+                each p in info.processosRelacionados
+                    if p.idRel == 'eComplementarDe' || p.idRel == 'eSuplementoDe' || p.idRel == 'eSuplementoPara' || p.idRel == 'eCruzadoCom'
+                        tr
+                        td.w3
+                            a(href="/" +p.codigo)= p.codigo
+                    
+    if info.nivel != 1
+        p.w3
+            a(href='/' + info.pai.codigo) Voltar
+    p.w3-center
+        a(href="/") Página Inicial 
+            
